@@ -1,6 +1,6 @@
 {
-    "name": "strong-axios-for-rxjs",
-    "version": "1.0.0",
+    "name": "axios-for-observable",
+    "version": "0.0.1",
     "description": "axios wrapper for rxjs",
     "main": "dist/cjs/index.js",
     "module": "dist/mjs/index.js",
