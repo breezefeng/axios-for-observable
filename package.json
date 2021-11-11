@@ -21,7 +21,7 @@
         "request",
         "requests",
         "http",
-        "http client",
+        "http-client",
         "frontend",
         "typescript",
         "nodejs"
