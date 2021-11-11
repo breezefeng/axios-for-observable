@@ -15,12 +15,16 @@
         "axios",
         "rxjs",
         "rx",
+        "rxjs-wrapper",
         "observable",
         "observables",
         "request",
         "requests",
         "http",
-        "http client"
+        "http client",
+        "frontend",
+        "typescript",
+        "nodejs"
     ],
     "author": "fengyuqing",
     "license": "ISC",
