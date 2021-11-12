@@ -99,30 +99,6 @@ Axios({
   }
 });
 ```
-use Axios.request(config) instead
-```js
-// Send a POST request
-Axios.request({
-  method: 'post',
-  url: '/user/12345',
-  data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  }
-});
-```
-
-```js
-// GET request for remote image
-Axios.request({
-  method:'get',
-  url:'http://bit.ly/2mTM3nY',
-  responseType:'stream'
-})
-  .subscribe(response => {
-  response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-});
-```
 
 ### Request method aliases
 
