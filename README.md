@@ -112,9 +112,6 @@ For convenience aliases have been provided for all supported request methods.
 ##### Axios.put(url[, data[, config]])
 ##### Axios.patch(url[, data[, config]])
 
-###### NOTE
-When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
-
 ### Concurrency
 
 as opposed to axios using `all` and `spread`, rxjs has a much better way of handling concurrency.
