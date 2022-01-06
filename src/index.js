@@ -1,27 +1,17 @@
-import axios, { AxiosPromise, AxiosResponse, AxiosRequestConfig, CancelTokenSource, Axios, AxiosInstance }  from 'axios';
+import axios, { Axios }  from 'axios';
 import { Observable } from 'rxjs';
-
-type AxiosObservable<T> = Observable<T>;
-
-declare module 'axios' {
-    interface Axios {
-        request<T = never, R = AxiosResponse<T>>(config: AxiosRequestConfig<T>): AxiosObservable<R> | AxiosPromise<R>;
-        create(config?: AxiosRequestConfig): AxiosInstance;
-    }
-}
 
 const originalRequest = Axios.prototype.request;
 
-// @ts-ignore
-Axios.prototype.request = function <T = never, R = AxiosResponse<T>>(config: AxiosRequestConfig<T>): AxiosObservable<R> | AxiosPromise<R> {
-    let cancelSource: CancelTokenSource;
+Axios.prototype.request = function (config) {
+    let cancelSource;
     const hasCancelToken = Boolean(config.cancelToken);
     if (hasCancelToken) {
         console.warn(
             `No need to use cancel token, just unsubscribe the subscription would cancel the http request automatically`,
         );
     }
-    const observable:AxiosObservable<R> = new Observable((subscriber: any) => {
+    const observable = new Observable(subscriber => {
         if (!hasCancelToken) {
             cancelSource = axios.CancelToken.source();
             config.cancelToken = cancelSource.token;
@@ -29,11 +19,10 @@ Axios.prototype.request = function <T = never, R = AxiosResponse<T>>(config: Axi
 
         originalRequest
             .call(this, config)
-            // @ts-ignore
-            .then((response: any) => {
+            .then(response => {
                 subscriber.next(response);
             })
-            .catch((error: any) => subscriber.error(error))
+            .catch(error => subscriber.error(error))
             .finally(() => {
                 subscriber.complete();
             });
@@ -41,7 +30,7 @@ Axios.prototype.request = function <T = never, R = AxiosResponse<T>>(config: Axi
 
     const _subscribe = observable.subscribe.bind(observable);
 
-    observable.subscribe = (...args2: any[]) => {
+    observable.subscribe = (...args2) => {
         const subscription = _subscribe(...args2);
 
         const _unsubscribe = subscription.unsubscribe.bind(subscription);
@@ -58,4 +47,4 @@ Axios.prototype.request = function <T = never, R = AxiosResponse<T>>(config: Axi
     return observable;
 };
 
-export default axios.create(axios.defaults as any);
+export default axios.create(axios.defaults);
