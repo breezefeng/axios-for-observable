@@ -1,5 +1,5 @@
 
-# axios-for-observable, same api as axios absolutely
+# axios-for-observable
 ##### Observable (as opposed to Promise) based HTTP client for the browser and node.js
 Want to use axios in a rxjs (observable) way? There we go!
 
@@ -7,6 +7,7 @@ This API of axios-for-observable is same as API of axios, giving you smooth tran
 
 ## Features
 
+- The same api with axios
 - Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser
 - Make [http](http://nodejs.org/api/http.html) requests from node.js
 - Supports the **Observable** API
